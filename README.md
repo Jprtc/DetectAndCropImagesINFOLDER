@@ -5,4 +5,4 @@ It's necessary to import the cv2 module using pip to be able to run the code.
 
 Then, write on your console:
 
-`! py .\faceDetectAndCropFOLDER.py .\FOLDER WITH THE IMAGES TO BE CROPPED\ .\FOLDER WHERE THE CROPPED IMAGES WILL BE SENT TO\`
+!`py .\faceDetectAndCropFOLDER.py .\FOLDER WITH THE IMAGES TO BE CROPPED\ .\FOLDER WHERE THE CROPPED IMAGES WILL BE SENT TO\`
