@@ -3,6 +3,7 @@ import sys;
 import os;
 
 pasta = sys.argv[1]
+pastaDestino = sys.argv[2]
 caminhoCasc = "haarcascade_frontalface_default.xml"
 
 faceCascade = cv2.CascadeClassifier(caminhoCasc)
@@ -19,16 +20,17 @@ def carregarImagensPasta(pasta):
 
 #Funcao coloca todas as imagens da pasta em uma lista
 carregarImagensPasta(pasta)
-#print(imagens)
 
 for imagem in imagens:
 
     imagem 
     cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
 
+#Alterar os valores aqui para resultados diferentes na detecção facial
+#Principalmente o scaleFactor e minSize
     faces = faceCascade.detectMultiScale(
         cinza,
-        scaleFactor = 1.1,
+        scaleFactor = 1.2,
         minNeighbors = 5,
         minSize = (50,50),
     )
@@ -36,17 +38,16 @@ for imagem in imagens:
     print("{0} Faces encontradas!".format(len(faces)))
 
     for (x,y,w,h) in faces: 
-        cv2.rectangle(imagem,(x,y), (x+w,y+h), (0,255,0), 1)
-        cropImg = imagem[y:y+h ,x:x+w]
-        #imagem[y:(y+h), x:(x+w)]
-        status = cv2.imwrite('C:/Users/joao.calazans/Desktop/faceDetection/PastaDestino/Imagem' + "_Cortada_" + str(counter) + '.jpg' ,cropImg)
+        cv2.rectangle(imagem,(x,y), (x+w,y+h), (0,255,0), 2)
+        cropImg = imagem[y:(y+h) ,x:(x+w)]
+
+        #cropImg = imagem[0:400, 0:350]
+    
+        status = cv2.imwrite(os.path.join(pastaDestino,'Imagem') + "_Cortada_" + str(counter) + '.jpg' ,cropImg)
         counter +=1
-        #cv2.imshow("Faces Cortadas",cropImg)
-        #cv2.waitKey(0)
+
+    #cv2.imshow("Faces Cortadas",imagem)
+    #cv2.waitKey(0)
         #print("Imagens salvas no sistema?",status)
         
-
-    cv2.imshow("Faces Detectadas",imagem)
-    cv2.waitKey(0)
-
-        
+print('Total de faces encontradas:',counter-1)
